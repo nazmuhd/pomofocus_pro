@@ -1,8 +1,8 @@
 
 import React, { useMemo, useState } from 'react';
-import { FocusSession, ReportData } from '../types';
-import { X, Calendar, Flame, Timer as TimerIcon, BarChart3, Download, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { FocusSession } from '../types';
+import { X, BarChart3 } from 'lucide-react';
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 interface ReportsModalProps {
   sessions: FocusSession[];
@@ -19,8 +19,7 @@ const ReportsModal: React.FC<ReportsModalProps> = ({ sessions, onClose }) => {
     const labels = Array.from({ length: count }, (_, i) => {
       const d = new Date();
       d.setDate(d.getDate() - i);
-      const dateStr = d.toLocaleDateString([], view === 'weekly' ? { weekday: 'short' } : { day: 'numeric', month: 'short' });
-      return dateStr;
+      return d.toLocaleDateString([], view === 'weekly' ? { weekday: 'short' } : { day: 'numeric', month: 'short' });
     }).reverse();
 
     sessions.forEach(s => {
@@ -57,7 +56,7 @@ const ReportsModal: React.FC<ReportsModalProps> = ({ sessions, onClose }) => {
           <button onClick={onClose} className="p-2.5 hover:bg-gray-50 rounded-xl transition-colors"><X className="w-5 h-5 text-gray-400" /></button>
         </div>
 
-        <div className="p-8 flex flex-col gap-8 overflow-y-auto max-h-[80vh] scrollbar-hide">
+        <div className="p-8 flex flex-col gap-6 overflow-y-auto max-h-[80vh] scrollbar-hide">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div className="bg-blue-50/50 p-4 rounded-2xl border border-blue-100 flex flex-col">
               <span className="text-2xl font-black text-blue-900">{stats.totalHours}</span>
